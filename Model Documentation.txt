@@ -1,0 +1,12 @@
+There is a reflection on how to generate paths:
+
+Essentially, I just followed the project guide on the Udacity page; however, I will still try to explain how that method works.
+First the first two points are first loaded from previous path. These direction of the path in the beginning,
+points ensure that the path will be tangent to the direction of car at all times so that it doesn't do some weird jerky motion mid-drive.
+Next, waypoints are generated 30, 60, and 90 meters ahead of the car. These are basically telling the car to go in front of it and helps to populate the spline.
+All the points in the spline vector are, however, reverse rotated (I don't know the technical term) to make them easier to deal with and to remove the rotation.
+Spline then does its job and the rest of the points that have not been reached are also added to the list.
+The final for loop then iterates through the spline to generate a path for the car. The points are then rotated back to global space and then added to the points to go to.
+
+The behavior control is really simple. If the car detects another car ahead of its future position and it is currently 20 meters away from it, it will attempt to change lanes if they also don't have cars that meet that condition.
+My car prefers to go to the left lane first then the right if the left is not availible.
